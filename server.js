@@ -5,7 +5,7 @@ import categoryRouter from "./src/services/category/index.js"
 import productRouter from "./src/services/products/index.js"
 
 const server = express()
-const { PORT } = process.env || 5001
+const { PORT } = process.env
 
 server.use(express.json())
 server.use(cors())
@@ -21,7 +21,7 @@ server.use("/product", productRouter)
 // )
 
 db.sequelize
-  .sync({ alter: true })
+  .sync()
   .then(() => {
     server.listen(PORT, () =>
       console.log("🚀 Server is running on port ", PORT)

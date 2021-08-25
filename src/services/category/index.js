@@ -23,7 +23,9 @@ router
 
   .post(async (req, res, next) => {
     try {
+      console.log('post category ')
       const data = await Category.create(req.body)
+      console.log(data)
       res.send(data)
     } catch (error) {
       console.log(error)
