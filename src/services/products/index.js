@@ -13,7 +13,9 @@ router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Product.findAll()
+      const data = await Product.findAll({
+        include: Category,
+      })
 
       res.send(data)
     } catch (error) {
@@ -21,7 +23,6 @@ router
       next(error)
     }
   })
-
   .post(async (req, res, next) => {
     try {
       const data = await Product.create(req.body)
@@ -36,7 +37,9 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Product.findByPk(req.params.id)
+      const data = await Product.findByPk(req.params.id, {
+        include: Category,
+      })
       res.send(data)
     } catch (error) {
       console.log(error)

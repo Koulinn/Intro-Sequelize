@@ -12,7 +12,9 @@ router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Category.findAll()
+      const data = await Category.findAll({
+        include: Product,
+      })
 
       res.send(data)
     } catch (error) {
@@ -37,7 +39,9 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Category.findByPk(req.params.id)
+      const data = await Category.findByPk(req.params.id, {
+        include: Product,
+      })
       res.send(data)
     } catch (error) {
       console.log(error)
