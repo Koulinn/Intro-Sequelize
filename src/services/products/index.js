@@ -8,6 +8,9 @@ const router = express.Router()
 router
   .route("/")
   .get(product.getAll)
+
+  router
+    .route("/:categoryId")
   .post(product.create)
 
 router
