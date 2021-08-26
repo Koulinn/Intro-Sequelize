@@ -1,12 +1,10 @@
 import express from "express"
 import db from "../../db/models/db_assoc.js"
-import s from "sequelize"
+import comment from "./handlers.js"
 
-const Category = db.Category
-const Product = db.Product
 const Comments = db.Comments
-const User = db.User
-
+const Product = db.Product
+import s from "sequelize"
 const { Op } = s
 
 const router = express.Router()
@@ -15,8 +13,8 @@ router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Product.findAll({
-        include: [Category, {model:Comments, include: User}],
+      const data = await Comments.findAll({
+        include: Product,
       })
 
       res.send(data)
@@ -25,22 +23,17 @@ router
       next(error)
     }
   })
-  .post(async (req, res, next) => {
-    try {
-      const data = await Product.create(req.body)
-      res.send(data)
-    } catch (error) {
-      console.log(error)
-      next(error)
-    }
-  })
+
+router
+  .route("/:userId/:productId")
+    .post(comment.create)
 
 router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Product.findByPk(req.params.id, {
-        include: Category,
+      const data = await Comments.findByPk(req.params.id, {
+        include: Product,
       })
       res.send(data)
     } catch (error) {
@@ -50,7 +43,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      const data = await Product.update(req.body, {
+      const data = await Comments.update(req.body, {
         where: { id: req.params.id },
         returning: true,
       })
@@ -62,7 +55,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const rows = await Product.destroy({
+      const rows = await Comments.destroy({
         where: {
           id: req.params.id,
         },
