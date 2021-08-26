@@ -23,7 +23,7 @@ const getAll = async (req, res, next) => {
   const getSingle = async (req, res, next) => {
     try {
       const data = await Product.findByPk(req.params.id, {
-        include: Category,
+        include: [Category, {model:Comments, include: User}]
       })
       res.send(data)
     } catch (error) {
