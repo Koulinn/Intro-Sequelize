@@ -5,6 +5,7 @@ import categoryRouter from "./src/services/category/index.js"
 import productRouter from "./src/services/products/index.js"
 import userRouter from "./src/services/user/index.js"
 import commentsRouter from "./src/services/comments/index.js"
+import cartRouter from "./src/services/cart/index.js"
 import lib from "./src/lib/index.js"
 
 const {errorHandlers, serverConfig} = lib
@@ -20,6 +21,7 @@ server.use("/category", categoryRouter)
 server.use("/product", productRouter)
 server.use("/user", userRouter)
 server.use("/comment", commentsRouter)
+server.use("/cart", cartRouter)
 
 
 
