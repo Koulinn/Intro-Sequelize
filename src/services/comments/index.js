@@ -9,10 +9,8 @@ const router = express.Router()
 router
   .route("/")
   .get(comment.getAll)
+  .post(comment.create)
 
-router
-  .route("/:userId/:productId")
-    .post(comment.create)
 
 router
   .route("/:id")
