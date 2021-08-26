@@ -34,7 +34,8 @@ const getAll = async (req, res, next) => {
   
   const create = async (req, res, next) => {
     try {
-      const data = await Product.create(req.body)
+      const {categoryId} = req.params
+      const data = await Product.create({...req.body, categoryId})
       res.send(data)
     } catch (error) {
       console.log(error)
