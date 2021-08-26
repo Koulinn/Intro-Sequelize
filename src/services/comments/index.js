@@ -1,12 +1,8 @@
 import express from "express"
-import db from "../../db/models/db_assoc.js"
 import comment from "./handlers.js"
 
-const Comments = db.Comments
-const Product = db.Product
-const User = db.User
-import s from "sequelize"
-const { Op } = s
+
+
 
 const router = express.Router()
 

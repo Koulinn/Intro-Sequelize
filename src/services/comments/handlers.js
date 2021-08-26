@@ -2,7 +2,6 @@ import db from "../../db/models/db_assoc.js"
 import s from "sequelize"
 const { Op } = s
 
-const Category = db.Category
 const Comments = db.Comments
 const Product = db.Product
 
