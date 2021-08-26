@@ -24,6 +24,10 @@ const User = sequelize.define("user", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-})
+},
+  {
+    timestamps: false
+  }
+)
 
 export default User
