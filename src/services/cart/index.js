@@ -12,8 +12,8 @@ router
   router
   .route("/:userId/:productId")
   .post(product.addProduct)
+  .delete(product.deleteSingle)
   // .get(product.getSingle)
   // .put(product.update)
-  // .delete(product.deleteSingle)
 
 export default router

@@ -10,9 +10,7 @@ const { Op } = s
 
 const getAll = async (req, res, next) => {
     try {
-      const data = await Product.findAll({
-        include: [Category, {model:Comments, include: User}],
-      })
+      const data = await Cart.findAll()
 
       res.send(data)
     } catch (error) {
@@ -58,13 +56,15 @@ const getAll = async (req, res, next) => {
   
   const deleteSingle = async (req, res, next) => {
     try {
-      const rows = await Product.destroy({
+      const {userId, productId } = req.params
+      const rows = await Cart.destroy({
         where: {
-          id: req.params.id,
+          userId,
+          productId
         },
       })
       if (rows > 0) {
-        res.send("ok")
+        res.status(204).send()
       } else {
         res.status(404).send("not found")
       }
