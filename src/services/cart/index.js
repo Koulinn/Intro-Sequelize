@@ -10,10 +10,13 @@ router
   .get(product.getAll)
   
   router
+    .route("/:userId")
+    .get(product.cartTotal)
+    
+router
   .route("/:userId/:productId")
   .post(product.addProduct)
   .delete(product.deleteSingle)
-  // .get(product.getSingle)
   // .put(product.update)
 
 export default router
