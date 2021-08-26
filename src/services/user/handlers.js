@@ -1,9 +1,12 @@
 import db from "../../db/models/db_assoc.js"
 import s from "sequelize"
+
 const { Op } = s
 
 const User = db.User
 const Comments = db.Comments
+
+
 
 const getAll = async (req, res, next) => {
     try {
@@ -53,6 +56,7 @@ const update = async (req, res, next) => {
         next(error)
     }
 }
+
 const deleteSingle = async (req, res, next) => {
     try {
         const rows = await User.destroy({
@@ -71,12 +75,27 @@ const deleteSingle = async (req, res, next) => {
     }
 }
 
+const uploadAvatar = async (req, res, next) => {
+    try {
+        const data = await User.update({avatar: req.file.path}, {
+            where: { id: req.params.id },
+            returning: true,
+        })
+        res.send(data[1][0])
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+
+}
+
 
 const user = {
     create: create,
     getAll: getAll,
     getSingle: getSingle,
     update: update,
+    uploadAvatar: uploadAvatar,
     deleteSingle: deleteSingle
 }
 
