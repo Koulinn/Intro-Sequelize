@@ -12,23 +12,24 @@ server.use(cors())
 
 server.use("/category", categoryRouter)
 server.use("/product", productRouter)
-// const db_sync = async () => await db.sequelize.sync()
 
-// server.listen(PORT, () => console.log("🚀 Server is running on port ", PORT))
+await db.sequelize.sync()
 
-// server.on("error", (error) =>
-//   console.log("🚀 Server is crashed due to ", error)
-// )
+server.listen(PORT, () => console.log("🚀 Server is running on port ", PORT))
 
-db.sequelize
-  .sync()
-  .then(() => {
-    server.listen(PORT, () =>
-      console.log("🚀 Server is running on port ", PORT)
-    )
+server.on("error", (error) =>
+  console.log("🚀 Server is crashed due to ", error)
+)
 
-    server.on("error", (error) =>
-      console.log("🚀 Server is crashed due to ", error)
-    )
-  })
-  .catch((error) => console.log(error))
+// const dbConn = async () => await db.sequelize
+//   .sync()
+//   .then(() => {
+//     server.listen(PORT, () =>
+//       console.log("🚀 Server is running on port ", PORT)
+//     )
+
+//     server.on("error", (error) =>
+//       console.log("🚀 Server is crashed due to ", error)
+//     )
+//   })
+//   .catch((error) => console.log(error))
